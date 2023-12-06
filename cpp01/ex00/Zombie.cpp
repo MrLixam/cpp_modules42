@@ -8,7 +8,7 @@ Zombie::Zombie(){
 }
 
 Zombie::~Zombie(){
-	std::cout << "Destructor Called on " << this->name << std::abort;
+	std::cout << "Destructor Called for " << this->name << std::endl;
 }
 
 Zombie::Zombie(std::string name){
@@ -17,15 +17,4 @@ Zombie::Zombie(std::string name){
 
 void Zombie::announce(){
 	std::cout << this->name << ": BraiiiiiiinnnzzzZ..." << std::endl;
-}
-
-Zombie* newZombie(std::string name){
-	Zombie newZombie(name);
-	return (&newZombie);
-}
-
-void randomChump(std::string name){
-	Zombie newZombie(name);
-	newZombie.announce();
-	return ;
 }
