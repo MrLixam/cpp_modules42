@@ -2,15 +2,9 @@
 #include <iostream>
 #include <iomanip>
 
-Contact::Contact()
-{
-	std::cout << "Default Constructor called" << std::endl;
-}
+Contact::Contact(){}
 
-Contact::~Contact()
-{
-	std::cout << "Destructor called" << std::endl;
-}
+Contact::~Contact(){}
 
 Contact::Contact(std::string first_name, std::string last_name, std::string nickname, std::string phone_nbr, std::string secret)
 {
@@ -29,22 +23,38 @@ void Contact::display_info()
 	std::cout << "Phone Number: " << this->phone_nbr << std::endl;
 	std::cout << "Darkest Secret: " << this->secret << std::endl;
 }
+
+static std::string swap_space(std::string str){
+	for (int i = 0; i < str.size(); i++){
+		if (isspace(str[i]))
+			str[i] = ' ';
+	}
+	return (str);
+}
+
 void Contact::search_info()
 {
-	std::cout << "|";
-	if (this->first_name.size() > 10) 
-		std::cout << this->first_name.substr(0, 9) << ".";
+	std::string tmp;
+	std::cout << "│";
+	tmp = this->first_name;
+	tmp = swap_space(tmp);
+	if (tmp.size() > 10) 
+		std::cout << tmp.substr(0, 9) << ".";
 	else 
-		std::cout << std::setfill(' ') << std::setw(10) << this->first_name;
-	std::cout << "|";
-	if (this->last_name.size() > 10) 
-		std::cout << this->last_name.substr(0, 9) << ".";
+		std::cout << std::setfill(' ') << std::setw(10) << tmp;
+	std::cout << "│";
+	tmp = this->last_name;
+	tmp = swap_space(tmp);
+	if (tmp.size() > 10) 
+		std::cout << tmp.substr(0, 9) << ".";
 	else 
-		std::cout << std::setfill(' ') << std::setw(10) << this->last_name;
-	std::cout << "|";
-	if (this->nickname.size() > 10)
-		std::cout << this->nickname.substr(0, 9) << ".";
+		std::cout << std::setfill(' ') << std::setw(10) << tmp;
+	std::cout << "│";
+	tmp = this->nickname;
+	tmp = swap_space(tmp);
+	if (tmp.size() > 10)
+		std::cout << tmp.substr(0, 9) << ".";
 	else 
-		std::cout << std::setfill(' ') << std::setw(10) << this->nickname;
-	std::cout << "|" << std::endl;
+		std::cout << std::setfill(' ') << std::setw(10) << tmp;
+	std::cout << "│" << std::endl;
 }

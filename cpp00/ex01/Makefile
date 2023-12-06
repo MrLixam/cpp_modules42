@@ -6,7 +6,7 @@
 #    By: lvincent <lvincent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/04 14:40:18 by lvincent          #+#    #+#              #
-#    Updated: 2023/12/06 17:26:35 by lvincent         ###   ########.fr        #
+#    Updated: 2023/12/06 19:14:10 by lvincent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ RESET = \033[0m
 
 NAME = phonebook
 
-SRC = Contact.cpp main.cpp 
+SRC = Contact.cpp main.cpp PhoneBook.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
