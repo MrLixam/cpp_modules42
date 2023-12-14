@@ -7,10 +7,11 @@ class PhoneBook {
 		PhoneBook();
 		~PhoneBook();
 		void addContact();
-		void search_display();
-		int display_contact(int n);
+		void search();
 	private:
 		Contact contacts[8];	
+		void search_display();
+		int display_contact(int n);
 		int i;
 		bool first;
 };

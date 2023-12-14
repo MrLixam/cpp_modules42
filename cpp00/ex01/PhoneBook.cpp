@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
+#include <sstream>
 
 PhoneBook::PhoneBook(){
 	this->i = 0;
@@ -69,8 +70,7 @@ void PhoneBook::search_display(){
 	}
 }
 
-int PhoneBook::display_contact(int n)
-{
+int PhoneBook::display_contact(int n){
 	if (n > 7){
 		std::cerr << "index not awesome enough for the PhoneBook :(" << std::endl;
 		return (1);
@@ -81,4 +81,21 @@ int PhoneBook::display_contact(int n)
 	}
 	this->contacts[n].display_info();
 	return (0);
+}
+
+void PhoneBook::search(void){
+	this->search_display();
+	int i = 1;
+	std::string selection;
+	while (i){
+		std::cout << "Choose a contact (1 - 8) :";
+		std::getline(std::cin, selection);
+		int temp;
+		std::stringstream buffer(selection);
+		buffer >> temp;
+		if (!buffer.fail())
+			i = this->display_contact(temp - 1);
+		else
+			std::cerr << "index not awesome enough for the PhoneBook :(" << std::endl;
+	}
 }
