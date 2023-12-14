@@ -12,6 +12,7 @@ class PhoneBook {
 	private:
 		Contact contacts[8];	
 		int i;
+		bool first;
 };
 
 #endif

@@ -6,7 +6,7 @@ Harl::Harl(void){}
 Harl::~Harl(void){}
 
 void Harl::debug(void){
-	std::cout << "I love having extra bacon for my 7XL-double-cheese-triple-pickle-specialketchup burger. I really do!" << std::endl;
+	std::cout << "I love having extra bacon for my 7XL-double-cheese-triple-pickle-special-ketchup burger. I really do!" << std::endl;
 }
 
 void Harl::info(void){
@@ -28,12 +28,12 @@ void Harl::complain(std::string level){
 		&Harl::warning,
 		&Harl::error,
 	};
-	std::string levels[4] = {"debug", "info", "warning", "error"};
+	std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 	int i = 0;
 	while (levels[i].compare(level)){
 		i++;
 	}
 	if (i < 4)
-		this->(functions[i]());
+		(this->*functions[i])();
 	return;
 }

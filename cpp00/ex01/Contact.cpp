@@ -25,7 +25,7 @@ void Contact::display_info()
 }
 
 static std::string swap_space(std::string str){
-	for (int i = 0; i < str.size(); i++){
+	for (size_t i = 0; i < str.size(); i++){
 		if (isspace(str[i]))
 			str[i] = ' ';
 	}

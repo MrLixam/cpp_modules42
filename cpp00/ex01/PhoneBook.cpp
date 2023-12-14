@@ -6,6 +6,7 @@
 
 PhoneBook::PhoneBook(){
 	this->i = 0;
+	this->first = true;
 }
 
 PhoneBook::~PhoneBook(){}
@@ -52,9 +53,11 @@ void PhoneBook::addContact(){
 	Contact newContact(fields[0], fields[1], fields[2], fields[3], fields[4]);
 	this->contacts[this->i] = newContact;
 	if (this->i < 7)
-		i++;
-	else
-		i = 0;
+		this->i++;
+	else{
+		this->first = false;
+		this->i = 0;
+	}
 }
 
 void PhoneBook::search_display(){
@@ -71,6 +74,10 @@ int PhoneBook::display_contact(int n)
 	if (n > 7){
 		std::cerr << "index not awesome enough for the PhoneBook :(" << std::endl;
 		return (1);
+	}
+	if (n >= this->i && this->first == true){
+		std::cout << "No contact at this index currently" << std::endl;
+		return (0);
 	}
 	this->contacts[n].display_info();
 	return (0);

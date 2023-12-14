@@ -6,7 +6,7 @@
 #    By: lvincent <lvincent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/04 14:40:18 by lvincent          #+#    #+#              #
-#    Updated: 2023/12/04 14:52:51 by lvincent         ###   ########.fr        #
+#    Updated: 2023/12/13 23:59:38 by lvincent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,21 +28,21 @@ SRC = megaphone.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
-CC = clang++
+CXX = clang++
 
-CFLAGS = -Wall -Werror -Wextra -std=c++98
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98
 
 all : $(NAME)
 
 bonus : $(BONUS)
 
-.c.o :
+.cpp.o :
 	@echo "$(GREEN)Compiling $<"
-	@$(CC) $(CFLAGS) -c $< -o $(<:.cpp=.o)
+	@$(CXX) $(CXXFLAGS) -c $< -o $(<:.cpp=.o)
 
 $(NAME) : $(OBJ)
 	@echo "$(BLUE)Compiled object files for $(NAME)$(RESET)"
-	@$(CC) $(OBJ) $(LIBFT) $(CFLAGS) -o $(NAME)
+	@$(CXX) $(OBJ) $(LIBFT) $(CXXFLAGS) -o $(NAME)
 	@echo "$(YELLOW)Compiled $(NAME)$(RESET)"
 
 clean :

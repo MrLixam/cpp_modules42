@@ -28,21 +28,21 @@ SRC = Contact.cpp main.cpp PhoneBook.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
-CC = clang++
+CXX = clang++
 
-CFLAGS = -Wall -Werror -Wextra -std=c++98
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98
 
 all : $(NAME)
 
 bonus : $(BONUS)
 
-.c.o :
+.cpp.o :
 	@echo "$(GREEN)Compiling $<"
-	@$(CC) $(CFLAGS) -c $< -o $(<:.cpp=.o)
+	@$(CXX) $(CXXFLAGS) -c $< -o $(<:.cpp=.o)
 
 $(NAME) : $(OBJ)
 	@echo "$(BLUE)Compiled object files for $(NAME)$(RESET)"
-	@$(CC) $(OBJ) $(LIBFT) $(CFLAGS) -o $(NAME)
+	@$(CXX) $(OBJ) $(LIBFT) $(CXXFLAGS) -o $(NAME)
 	@echo "$(YELLOW)Compiled $(NAME)$(RESET)"
 
 clean :

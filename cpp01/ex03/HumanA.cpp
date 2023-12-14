@@ -1,7 +1,7 @@
 #include "HumanA.hpp"
 #include <iostream>
 
-HumanA::HumanA(std::string name, Weapon& weapon):_weapon(weapon),_name(name){}
+HumanA::HumanA(std::string name, Weapon& weapon):_name(name), _weapon(weapon){}
 
 HumanA::~HumanA(){
 	std::cout << "Destructor called for " << this->_name << std::endl;
