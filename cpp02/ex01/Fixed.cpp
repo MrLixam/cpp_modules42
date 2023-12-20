@@ -1,42 +1,49 @@
 #include "Fixed.hpp"
 #include <iostream>
+#include <fstream>
 #include <cstdlib>
+#include <cmath>
 
 Fixed::Fixed(){
 	this->_value = 0;
 }
 
 Fixed::Fixed(const int value){
-	this->_value = value * (2^(this->_fixed));
+	this->_value = value * (1 << this->_fixed);
+}
+
+Fixed::Fixed(const float value){
+	this->_value = (int)roundf(value *(1 << this->_fixed));
+}
+
+Fixed::Fixed(const Fixed& src){
+	this->_value = src.getRawBits();
 }
 
 Fixed::~Fixed(){}
 
-void Fixed::operator=(Fixed& src){
+Fixed& Fixed::operator=(const Fixed& src){
 	this->_value = src.getRawBits();
+	return *this;
 }
 
-void Fixed::operator<<(std::ofstream outfile){
-	outfile << "placeholder" << std::endl;
+int Fixed::toInt(void) const{
+	return (this->_value / (1 << this->_fixed));
 }
 
-int Fixed::toInt(void){ return (0);}
-
-float Fixed::toFloat(void){
-	int buffer = abs(this->_value);
-	int sign = 1;
-	if (this->_value < 0){
-		buffer = this->_value - 1;
-		buffer = ~buffer;
-		sign = -1;
-	}
-	return(((1.0 * buffer) / (2 ^ this->_fixed)) * sign);
+float Fixed::toFloat(void) const{
+	return((float)this->_value / (1 << this->_fixed));
 }
 
-int Fixed::getRawBits(void){
+int Fixed::getRawBits(void) const {
 	return (this->_value);
 }
 
 void Fixed::setRawBits(int const raw){
 	this->_value = raw;
+}
+
+std::ostream& operator<<(std::ostream& outfile, const Fixed& val){
+	outfile << val.toFloat();
+	return (outfile);
 }

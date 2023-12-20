@@ -6,95 +6,73 @@
 #include <sstream>
 
 PhoneBook::PhoneBook(){
-	this->i = 0;
+	this->_index = 0;
 	this->first = true;
 }
 
 PhoneBook::~PhoneBook(){}
 
 void PhoneBook::addContact(){
-	std::string tmp = "";
+	std::string tmp;
 	std::string fields[5];
+	std::string msg[5] = {"First name: ", "Last Name: ", "Nickname: ", "Phone Number: ", "Darkest Secret: "};
 
-	while (tmp == ""){
-		std::cout << "First Name: ";
-		std::getline(std::cin, tmp);
-		if (tmp != "")
-			fields[0] = tmp;
+	for (int i = 0; i < 5; i++){
+		while (tmp.empty()){	
+			std::cout << msg[i];
+			getline(std::cin, tmp);
+			if (std::cin.eof())
+				return ;
+			if (!tmp.empty())
+				fields[i] = tmp;
+		}
+		tmp = "";
 	}
-	tmp = "";
-	while (tmp == ""){
-		std::cout << "Last Name: ";
-		std::getline(std::cin, tmp);
-		if (tmp != "")
-			fields[1] = tmp;
-	}
-	tmp = "";
-	while (tmp == ""){
-		std::cout << "Nickname: ";
-		std::getline(std::cin, tmp);
-		if (tmp != "")
-			fields[2] = tmp;
-	}
-	tmp = "";
-	while (tmp == ""){
-		std::cout << "Phone Number: ";
-		std::getline(std::cin, tmp);
-		if (tmp != "")
-			fields[3] = tmp;
-	}
-	tmp = "";
-	while (tmp == ""){
-		std::cout << "Darkest Secret: ";
-		std::getline(std::cin, tmp);
-		if (tmp != "")
-			fields[4] = tmp;
-	}
-	tmp = "";
-	Contact newContact(fields[0], fields[1], fields[2], fields[3], fields[4]);
-	this->contacts[this->i] = newContact;
-	if (this->i < 7)
-		this->i++;
-	else{
+	this->contacts[this->_index].updateInfo(fields[0], fields[1], fields[2], fields[3], fields[4]);
+	if (this->_index < 7)
+		this->_index++;
+	else {
 		this->first = false;
-		this->i = 0;
+		this->_index = 0;
 	}
+	return ;
 }
 
-void PhoneBook::search_display(){
-	std::cout << "│     index│first name│ last name│  nickname│" << std::endl;
-	std::cout << "├──────────┼──────────┼──────────┼──────────┤" << std::endl;
+void PhoneBook::searchDisplay(){
+	std::cout << "|     index|first name| last name|  nickname|" << std::endl;
 	for (int j = 0; j < 8; j++){
-		std::cout << "│" << std::setfill(' ') << std::setw(10) << j + 1;
-		this->contacts[j].search_info();
+		std::cout << "|" << std::setfill(' ') << std::setw(10) << j + 1;
+		this->contacts[j].searchInfo();
 	}
 }
 
-int PhoneBook::display_contact(int n){
-	if (n > 7){
+int PhoneBook::displayContact(int n){
+	if (n > 7 || n < 0){
 		std::cerr << "index not awesome enough for the PhoneBook :(" << std::endl;
 		return (1);
 	}
-	if (n >= this->i && this->first == true){
+	if (n >= this->_index && this->first == true){
 		std::cout << "No contact at this index currently" << std::endl;
 		return (0);
 	}
-	this->contacts[n].display_info();
+	this->contacts[n].displayInfo();
 	return (0);
 }
 
 void PhoneBook::search(void){
-	this->search_display();
+	this->searchDisplay();
 	int i = 1;
 	std::string selection;
 	while (i){
-		std::cout << "Choose a contact (1 - 8) :";
+		std::cout << "Choose a contact (1 - 8): ";
 		std::getline(std::cin, selection);
 		int temp;
 		std::stringstream buffer(selection);
 		buffer >> temp;
 		if (!buffer.fail())
-			i = this->display_contact(temp - 1);
+			i = this->displayContact(temp - 1);
+		else if (std::cin.eof())
+			return;
 		else
 			std::cerr << "index not awesome enough for the PhoneBook :(" << std::endl;
 	}

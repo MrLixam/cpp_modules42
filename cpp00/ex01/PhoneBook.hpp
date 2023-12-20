@@ -10,9 +10,9 @@ class PhoneBook {
 		void search();
 	private:
 		Contact contacts[8];	
-		void search_display();
-		int display_contact(int n);
-		int i;
+		void searchDisplay();
+		int displayContact(int n);
+		int _index;
 		bool first;
 };
 

@@ -8,15 +8,14 @@
 
 int main()
 {
-	std::ios_base::sync_with_stdio(false);
 	PhoneBook phone;
 	std::string input;
 	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	while (true){
 		std::getline(std::cin, input);
-		if (std::cin.eof()) {
-			std::cin.clear();
-			continue;
+		if (std::cin.eof()){
+			break;
 		}
 		if (input == "ADD")
 			phone.addContact();

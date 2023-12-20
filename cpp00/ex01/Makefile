@@ -6,7 +6,7 @@
 #    By: lvincent <lvincent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/04 14:40:18 by lvincent          #+#    #+#              #
-#    Updated: 2023/12/06 19:14:10 by lvincent         ###   ########.fr        #
+#    Updated: 2023/12/17 18:08:48 by lvincent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,8 +33,6 @@ CXX = clang++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98
 
 all : $(NAME)
-
-bonus : $(BONUS)
 
 .cpp.o :
 	@echo "$(GREEN)Compiling $<"

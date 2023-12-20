@@ -12,7 +12,8 @@ std::string replace(std::string content, std::string s1, std::string s2){
 	while (nextfind != std::string::npos){
 		content.erase(nextfind, s1.size());
 		content.insert(nextfind, s2);
-		nextfind = content.find(s1);
+		nextfind += s2.size();
+		nextfind = content.find(s1, nextfind);
 	}
 	return (content);
 }
@@ -40,7 +41,7 @@ int main(int argc, char **argv){
 	str = replace(str, argv[2], argv[3]);
 	std::string name = argv[1];
 	name += ".replace";
-	std::ofstream outfile(name);
+	std::ofstream outfile(name.c_str());
 	outfile << str;
 	infile.close();
 	outfile.close();
