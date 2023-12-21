@@ -42,6 +42,10 @@ int main(int argc, char **argv){
 	std::string name = argv[1];
 	name += ".replace";
 	std::ofstream outfile(name.c_str());
+	if (outfile.fail()){
+		std::cerr << "Error: " << name << ": output file failed" << std::endl;
+		return (1);
+	}
 	outfile << str;
 	infile.close();
 	outfile.close();
