@@ -3,22 +3,21 @@
 #include <string>
 
 Zombie::Zombie(){
-	this->name = "";
 	std::cout << "Default Constructor Called" << std::endl;
 }
 
 Zombie::~Zombie(){
-	std::cout << "Destructor Called for " << this->name << std::endl;
+	std::cout << "Destructor Called for" << this->_name << std::endl;
 }
 
-Zombie::Zombie(std::string name){
-	this->name = name;
+Zombie::Zombie(std::string name): _name(name){
+	std::cout << "Constructor called" << std::endl;
 }
 
-void Zombie::announce(){
-	std::cout << this->name << ": BraiiiiiiinnnzzzZ..." << std::endl;
+void Zombie::announce(void) const{
+	std::cout << this->_name << ": BraiiiiiiinnnzzzZ..." << std::endl;
 }
 
 void Zombie::setName(std::string name){
-	this->name = name;
+	this->_name = name;
 }

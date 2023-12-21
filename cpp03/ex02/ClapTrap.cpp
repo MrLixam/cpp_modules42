@@ -6,7 +6,7 @@ ClapTrap::ClapTrap(void): _name("CL4P-TP"), _hit_points(10), _energy_points(10),
 	std::cout << "ClapTrap Default Constructor Called" << std::endl;
 }
 
-ClapTrap::ClapTrap(std::string name): _name(name), _hit_points(10), _energy_points(10), _attack_damage(0){
+ClapTrap::ClapTrap(std::string name, unsigned int hp, unsigned int ep, unsigned int ad): _name(name), _hit_points(hp), _energy_points(ep), _attack_damage(ad){
 	std::cout << "ClapTrap Constructor Called" << std::endl;
 }
 
@@ -29,7 +29,7 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& x){
 
 void ClapTrap::attack(const std::string& target){
 	if (this->_energy_points > 0 && this->_hit_points > 0){
-		std::cout << this->_name << " attacks " << target << " dealing them " << this->_attack_damage << " damage!!!" << std::endl;
+		std::cout << "ClapTrap " << this->_name << " attacks " << target << " dealing them " << this->_attack_damage << " damage!!!" << std::endl;
 		this->_energy_points--;
 	}
 	else {

@@ -5,13 +5,13 @@ class Fixed {
 	public:
 		Fixed();
 		~Fixed();
-		Fixed(Fixed& src);
+		Fixed(const Fixed& src);
 		int getRawBits(void);
 		void setRawBits(int const raw);
-		void operator=(Fixed& src);
+		Fixed& operator=(const Fixed& src);
 	private:
-		int value;
-		static const int fixed = 8;
+		int _value;
+		static const int _fixed = 8;
 };
 
 #endif

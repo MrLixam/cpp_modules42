@@ -10,13 +10,13 @@ BLUE = \033[0;34m
 
 RESET = \033[0m
 
-NAME = fixed
+NAME = ClapTrap
 
-SRC = Fixed.cpp main.cpp
+SRC = ClapTrap.cpp main.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
-CXX = clang++
+CXX = c++
 
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98
 

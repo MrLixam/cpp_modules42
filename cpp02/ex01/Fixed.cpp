@@ -4,26 +4,18 @@
 #include <cstdlib>
 #include <cmath>
 
-Fixed::Fixed(){
-	this->_value = 0;
-}
+Fixed::Fixed(): _value(0){}
 
-Fixed::Fixed(const int value){
-	this->_value = value * (1 << this->_fixed);
-}
+Fixed::Fixed(const int value): _value(value * (1 << this->_fixed)){}
 
-Fixed::Fixed(const float value){
-	this->_value = (int)roundf(value *(1 << this->_fixed));
-}
+Fixed::Fixed(const float value): _value((int)roundf(value *(1 << this->_fixed))){}
 
-Fixed::Fixed(const Fixed& src){
-	this->_value = src.getRawBits();
-}
+Fixed::Fixed(const Fixed& src): _value(src._value){}
 
 Fixed::~Fixed(){}
 
 Fixed& Fixed::operator=(const Fixed& src){
-	this->_value = src.getRawBits();
+	this->_value = src._value;
 	return *this;
 }
 
