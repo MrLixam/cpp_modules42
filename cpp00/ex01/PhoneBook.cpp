@@ -67,13 +67,13 @@ void PhoneBook::search(void){
 		std::cout << "Choose a contact (1 - 8): ";
 		std::getline(std::cin, selection);
 		int temp;
-		std::stringstream buffer(selection);
-		buffer >> temp;
-		if (!buffer.fail())
-			i = this->displayContact(temp - 1);
-		else if (std::cin.eof())
+		if (std::cin.eof())
 			return;
-		else
-			std::cerr << "index not awesome enough for the PhoneBook :(" << std::endl;
+		if (selection.size() == 1){
+			temp = selection[0] - 48;
+			i = displayContact(temp - 1);
+			continue;
+		}
+		std::cerr << "index not awesome enough for the PhoneBook :(" << std::endl;
 	}
 }

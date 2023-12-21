@@ -6,7 +6,7 @@ Contact::Contact(){}
 
 Contact::~Contact(){}
 
-void Contact::updateInfo(std::string first_name, std::string last_name, std::string nickname, std::string phone_nbr, std::string secret)
+void Contact::updateInfo(std::string& first_name, std::string& last_name, std::string& nickname, std::string& phone_nbr, std::string& secret)
 {
 	this->first_name = first_name;
 	this->last_name = last_name;
