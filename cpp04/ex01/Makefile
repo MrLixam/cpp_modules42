@@ -12,13 +12,13 @@ RESET = \033[0m
 
 NAME = animals
 
-SRC = FragTrap.cpp ClapTrap.cpp main.cpp
+SRC = Cat.cpp Dog.cpp Animal.cpp Brain.cpp main.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
 CXX = c++
 
-CXXFLAGS = -Wall -Werror -Wextra -std=c++98
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98 -g
 
 all : $(NAME)
 
