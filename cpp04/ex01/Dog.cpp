@@ -4,7 +4,7 @@
 
 Dog::Dog(void): Animal("Dog"){
 	std::cout << "Dog Default Constructor Called" << std::endl;
-	this->_brain = new Brain;
+	this->_brain = new Brain();
 }
 
 Dog::~Dog(void)
@@ -16,8 +16,7 @@ Dog::~Dog(void)
 Dog::Dog(Dog &copy): Animal("Dog")
 {
 	std::cout << "Dog Copy Constructor called" << std::endl;
-	this->_brain = new Brain;
-	this->_brain = copy._brain;
+	this->_brain = new Brain(*copy._brain);
 }
 
 Dog& Dog::operator=(const Dog& x)

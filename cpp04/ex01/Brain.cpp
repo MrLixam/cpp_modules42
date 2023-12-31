@@ -36,6 +36,9 @@ void Brain::setIdea(size_t n, std::string idea){
 
 void Brain::showIdeas(void) const{
 	for (int i = 0; i < 100; i++){
-		std::cout << ideas[i] << std::endl;
+		if (!ideas[i].empty())
+			std::cout << ideas[i] << std::endl;
+		else
+			std::cout << "some other random thoughts" << std::endl;
 	}
 }

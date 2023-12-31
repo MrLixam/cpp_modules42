@@ -31,5 +31,7 @@ int main(){
 
 	brain1->setIdea(10, "this is base brain");
 	brain2->setIdea(10, "this is copy brain");
+	brain1->showIdeas();
+	brain2->showIdeas();
 	return (0);
 }
