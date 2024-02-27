@@ -1,48 +1,56 @@
-GREEN = \033[0;32m
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: lvincent <lvincent@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/01/18 05:51:01 by lvincent          #+#    #+#              #
+#    Updated: 2024/02/27 08:05:38 by lvincent         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-RED = \033[0;31m
+GREEN = \033[1;32m
 
-RED_B = \033[1;31m
-
-YELLOW = \033[1;33m
-
-BLUE = \033[0;34m
+RED = \033[1;31m
 
 RESET = \033[0m
 
-NAME = animals
+CC 		=	c++ 
 
-SRC = Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp main.cpp
+FLAGS 	=	-Werror -Wall -Wextra -std=c++98
+NAME 	=	Bureaucrats
 
-OBJ = $(SRC:.cpp=.o)
+SRC_DIR = src
 
-CXX = c++
+OBJ_DIR = obj
 
-CXXFLAGS = -Wall -Werror -Wextra -std=c++98 -g
+SRC 	=	src/main.cpp src/Bureaucrat.cpp src/Form.cpp
 
-all : $(NAME)
+OBJ = $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRC))
 
-bonus : $(BONUS)
+all: $(NAME)
 
-.cpp.o :
-	@echo "$(GREEN)Compiling $<"
-	@$(CXX) $(CXXFLAGS) -c $< -o $(<:.cpp=.o)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@mkdir -p $(@D)
+	@printf "$(GREEN)$(NAME) [Compiling ...]$(RESET) $<\n"
+	@$(CC) $(FLAGS) -o $@ -c $<
 
-$(NAME) : $(OBJ)
-	@echo "$(BLUE)Compiled object files for $(NAME)$(RESET)"
-	@$(CXX) $(OBJ) $(LIBFT) $(CXXFLAGS) -o $(NAME)
-	@echo "$(YELLOW)Compiled $(NAME)$(RESET)"
+$(NAME): $(OBJ)
+	@$(CC) $(FLAGS) $(OBJ) -o $(NAME)
+	@printf "$(GREEN)$(NAME) [Executable created]\n"
 
-clean :
-	@rm -f $(OBJ)
-	@echo "$(RED)Removed object files from project and dependencies$(RESET)"
+clean:
+	@rm -rf $(OBJ_DIR)
+	@printf "$(RED)$(NAME) [Removed sources]$(RESET)\n"
 
-fclean :
-	@rm -f $(OBJ)
-	@echo "$(RED)Removed object files from project and dependencies$(RESET)"
-	@rm -f $(NAME)
-	@echo "$(RED_B)Removed $(NAME)$(RESET)"
+fclean: clean
+	@rm -rf $(NAME)
+	@printf "$(RED)$(NAME) [Executable deleted]$(RESET)\n"
 
-re : fclean all
+re: fclean all
 
-.PHONY : all clean fclean re
+debug: FLAGS += -g
+debug: $(NAME)
+
+.PHONY: all clean fclean re debug

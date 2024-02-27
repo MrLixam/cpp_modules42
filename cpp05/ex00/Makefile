@@ -6,7 +6,7 @@
 #    By: lvincent <lvincent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/18 05:51:01 by lvincent          #+#    #+#              #
-#    Updated: 2024/02/26 04:19:25 by lvincent         ###   ########.fr        #
+#    Updated: 2024/02/27 08:05:58 by lvincent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRC_DIR = src
 
 OBJ_DIR = obj
 
-SRC 	=	src/main.cpp
+SRC 	=	src/main.cpp src/Bureaucrat.cpp
 
 OBJ = $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRC))
 
@@ -41,7 +41,7 @@ $(NAME): $(OBJ)
 	@printf "$(GREEN)$(NAME) [Executable created]\n"
 
 clean:
-	@rm -f $(OBJ)
+	@rm -rf $(OBJ_DIR)
 	@printf "$(RED)$(NAME) [Removed sources]$(RESET)\n"
 
 fclean: clean

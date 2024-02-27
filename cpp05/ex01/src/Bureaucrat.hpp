@@ -4,6 +4,8 @@
 #include <string>
 #include <fstream>
 
+class Form;
+
 class Bureaucrat
 {
 	private:
@@ -18,11 +20,11 @@ class Bureaucrat
 		Bureaucrat(const Bureaucrat &copy);
 		~Bureaucrat();
 		Bureaucrat& operator=(const Bureaucrat &copy);
-		const std::string getName(void) const;
+		std::string getName(void) const;
 		int getGrade(void) const;
 		void decreaseGrade(void);
 		void increaseGrade(void);
-		
+		void signForm(Form& to_sign);
 		class GradeTooHighException : public std::exception
 		{
 			virtual const char *what() const throw();
