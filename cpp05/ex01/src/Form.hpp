@@ -14,8 +14,6 @@ class Form
 	public:
 		Form();
 		Form(const Form& copy);
-		Form(std::string name);
-		Form(int grade_to_sign, int grade_to_execute);
 		Form(std::string name, int grade_to_sign, int grade_to_execute);
 		~Form();
 		Form &operator=(const Form& copy);

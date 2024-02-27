@@ -3,17 +3,7 @@
 
 Form::Form(): _name("useless form"), _signed(false), _grade_to_sign(150), _grade_to_execute(150) {}
 
-Form::Form(std::string name): _name(name), _signed(false), _grade_to_sign(150), _grade_to_execute(150) {}
-
 Form::Form(std::string name, int grade_to_sign, int grade_to_execute): _name(name), _signed(false), _grade_to_sign(grade_to_sign), _grade_to_execute(grade_to_execute)
-{
-	if (grade_to_sign < 1 || grade_to_execute < 1)
-		throw Form::GradeTooHighException();
-	if (grade_to_execute > 150 || grade_to_sign > 150)
-		throw Form::GradeTooLowException();
-}
-
-Form::Form(int grade_to_sign, int grade_to_execute): _name("useless form"), _signed(false), _grade_to_sign(grade_to_sign), _grade_to_execute(grade_to_execute)
 {
 	if (grade_to_sign < 1 || grade_to_execute < 1)
 		throw Form::GradeTooHighException();

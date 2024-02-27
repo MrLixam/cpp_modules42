@@ -17,6 +17,16 @@ int main(void)
 	std::cout << std::endl;
 	try
 	{
+		Form test("test form");
+		std::cout << test << std::endl;
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "Exception : " << e.what() << std::endl;
+	}
+	std::cout << std::endl;
+	try
+	{
 		Form test("test form", 151, 150);
 		std::cout << test << std::endl;
 	}
