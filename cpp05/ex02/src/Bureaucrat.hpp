@@ -4,7 +4,7 @@
 #include <string>
 #include <fstream>
 
-class Form;
+class AForm;
 
 class Bureaucrat
 {
@@ -24,7 +24,8 @@ class Bureaucrat
 		int getGrade(void) const;
 		void decreaseGrade(void);
 		void increaseGrade(void);
-		void signForm(Form& to_sign);
+		void signForm(AForm& to_sign);
+		void executeForm(AForm& to_execute);
 		class GradeTooHighException : public std::exception
 		{
 			virtual const char *what() const throw();
