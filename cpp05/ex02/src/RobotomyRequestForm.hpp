@@ -1,3 +1,6 @@
+#ifndef ROBOTOMYREQUESTFORM_HPP
+#define ROBOTOMYREQUESTFORM_HPP
+
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
 #include <string>
@@ -13,3 +16,5 @@ class RobotomyRequestForm : public AForm
 		RobotomyRequestForm& operator=(const RobotomyRequestForm& copy);
 		void execute(Bureaucrat const & executor) const;
 };
+
+#endif

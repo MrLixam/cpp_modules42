@@ -1,3 +1,6 @@
+#ifndef SHRUBBERYCREATIONFORM_HPP
+#define SHRUBBERYCREATIONFORM_HPP
+
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
 #include <string>
@@ -13,3 +16,5 @@ class ShrubberyCreationForm : public AForm
 		ShrubberyCreationForm& operator=(const ShrubberyCreationForm& copy);
 		void execute(Bureaucrat const & executor) const;
 };
+
+#endif
