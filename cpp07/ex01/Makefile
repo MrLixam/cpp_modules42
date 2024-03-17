@@ -6,7 +6,7 @@
 #    By: lvincent <lvincent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/18 05:51:01 by lvincent          #+#    #+#              #
-#    Updated: 2024/03/12 17:48:32 by lvincent         ###   ########.fr        #
+#    Updated: 2024/03/17 02:25:48 by lvincent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ RESET = \033[0m
 CC 		=	c++ 
 
 FLAGS 	=	-Werror -Wall -Wextra -std=c++98
-NAME 	=	Templates
+NAME 	=	iter
 
 SRC_DIR = src
 

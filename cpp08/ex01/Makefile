@@ -6,7 +6,7 @@
 #    By: lvincent <lvincent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/18 05:51:01 by lvincent          #+#    #+#              #
-#    Updated: 2024/03/17 02:26:13 by lvincent         ###   ########.fr        #
+#    Updated: 2024/03/16 16:49:35 by lvincent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,13 +19,13 @@ RESET = \033[0m
 CC 		=	c++ 
 
 FLAGS 	=	-Werror -Wall -Wextra -std=c++98
-NAME 	=	Templates
+NAME 	=	Span
 
 SRC_DIR = src
 
 OBJ_DIR = obj
 
-SRC 	=	src/main.cpp
+SRC 	=	src/main.cpp src/Span.cpp
 
 OBJ = $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRC))
 
