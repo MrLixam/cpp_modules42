@@ -4,13 +4,11 @@
 #include <cstdlib>
 #include <iostream>
 
-template <typename T>
-void iter(T* array, size_t length, void (*f)(T&))
+template <typename T, typename U>
+void iter(T* array, size_t length, U *f)
 {
 	for (size_t i = 0; i < length; i++)
-	{
 		f(array[i]);
-	}
 }
 
 template<typename T>
