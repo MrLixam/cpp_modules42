@@ -34,7 +34,7 @@ Bureaucrat::~Bureaucrat(void) {}
 
 int Bureaucrat::getGrade(void) const{ return (_grade);}
 
-const std::string Bureaucrat::getName(void) const{ return (_name);}
+std::string Bureaucrat::getName(void) const{ return (_name);}
 
 void Bureaucrat::increaseGrade(void) {
 	if (_grade == 1)

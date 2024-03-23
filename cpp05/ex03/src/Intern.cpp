@@ -9,36 +9,42 @@ Intern::Intern(void) { }
 
 Intern::~Intern(void) { }
 
+static AForm* newShrubbery(std::string target)
+{
+	return (new ShrubberyCreationForm(target));
+}
+
+
+static AForm* newPresidential(std::string target)
+{
+	return (new PresidentialPardonForm(target));
+}
+
+static AForm* newRobotomy(std::string target)
+{
+	return (new RobotomyRequestForm(target));
+}
+
 AForm* Intern::makeForm(const std::string name, const std::string target) const
 {
-	int formChoice = -1;
-	std::string validNames[3] = {
+	std::string	validNames[3] = {
 									"shrubbery creation form",
 									"robotomy request form",
 									"presidential pardon form"
 								};
+	newForms forms[3] = {
+							&newShrubbery,
+							&newPresidential,
+							&newRobotomy
+						};
 
 	for (int i = 0; i < 3; i++)
 	{
 		if (name == validNames[i])
 		{
-			formChoice = i;
-			break;
+			std::cout << "Intern creates " << validNames[i] << std::endl;
+			return (forms[i](target));
 		}
 	}
-	switch (formChoice)
-	{
-		case 0:
-			std::cout << "Itern creates " << validNames[formChoice] << std::endl;
-			return (new ShrubberyCreationForm(target));
-		case 1:
-			std::cout << "Itern creates " << validNames[formChoice] << std::endl;
-			return (new RobotomyRequestForm(target));
-		case 2:
-			std::cout << "Itern creates " << validNames[formChoice] << std::endl;
-			return (new PresidentialPardonForm(target));
-		default:
-			std::cerr << "the intern does not know this form" << std::endl;
-	}
-	return (NULL);
+	return (new AForm("pointless", target, 150, 150));
 }

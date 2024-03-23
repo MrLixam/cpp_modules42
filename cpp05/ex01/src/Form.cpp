@@ -57,7 +57,7 @@ void Form::beSigned(Bureaucrat &who)
 	if (_signed)
 		throw Form::FormAlreadySignedException();
 	if (who.getGrade() > _grade_to_sign)
-		throw Bureaucrat::GradeTooLowException();
+		throw Form::GradeTooHighException();
 	_signed = true;
 }
 

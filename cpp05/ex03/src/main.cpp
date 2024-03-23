@@ -16,10 +16,19 @@ int main(void)
 	AForm *test;
 	Intern Jeff;
 	Bureaucrat manager("the Manager", 1);
-
-	test = Jeff.makeForm("shrubbery creation form", "Makefile");
-	manager.signForm(*test);
-	manager.executeForm(*test);
-	delete test;
+	std::string target = "someone";
+	std::string forms[4] = {
+							"shrubbery creation form",
+							"presidential pardon form",
+							"robotomy request form",
+							"invalid"
+							};
+	for (int i = 0; i < 4; i++)
+	{
+		test = Jeff.makeForm(forms[i], target);
+		manager.signForm(*test);
+		manager.executeForm(*test);
+		delete test;
+	}
 	return (0);
 }

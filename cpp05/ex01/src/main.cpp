@@ -73,9 +73,9 @@ int main(void)
 	std::cout << std::endl;
 	try
 	{
-		Form test("test form", 150, 150);
+		Form test("test form", 120, 120);
 		Form test2;
-		Bureaucrat tester;
+		Bureaucrat tester(120);
 
 		std::cout << test << std::endl;
 		std::cout << test2 << std::endl;

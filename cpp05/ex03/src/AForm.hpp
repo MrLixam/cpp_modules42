@@ -43,7 +43,7 @@ class AForm
 		{
 			virtual const char *what() const throw();
 		};
-		virtual void execute(Bureaucrat const & executor) const = 0;
+		virtual void execute(Bureaucrat const & executor) const;
 };
 
 std::ostream& operator<<(std::ostream &outfile, AForm& object);

@@ -14,4 +14,6 @@ class Intern
 		AForm* makeForm(const std::string name, const std::string target) const;
 };
 
+typedef AForm* (*newForms)(std::string target);
+
 #endif

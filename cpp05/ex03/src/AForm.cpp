@@ -1,4 +1,5 @@
 #include "AForm.hpp"
+#include <iostream>
 #include "Bureaucrat.hpp"
 
 AForm::AForm(): _name("useless form"), _signed(false), _grade_to_sign(150), _grade_to_execute(150) {}
@@ -64,7 +65,7 @@ void AForm::beSigned(Bureaucrat &who)
 	if (_signed)
 		throw AForm::AFormAlreadySignedException();
 	if (who.getGrade() > _grade_to_sign)
-		throw Bureaucrat::GradeTooLowException();
+		throw AForm::GradeTooHighException();
 	_signed = true;
 }
 
@@ -76,6 +77,15 @@ void AForm::setTarget(std::string new_target)
 void AForm::setSigned(bool new_state)
 {
 	_signed = new_state;
+}
+
+void AForm::execute(const Bureaucrat &executor) const
+{
+	if (!isSigned())
+		throw AForm::AFormNotSignedException();
+	if (executor.getGrade() > getToExec())
+		throw Bureaucrat::GradeTooLowException();
+	std::cout << "This form is quite useless, but it affects " << _target << " somehow" << std::endl;
 }
 
 std::ostream& operator<<(std::ostream &outfile, AForm& object)
