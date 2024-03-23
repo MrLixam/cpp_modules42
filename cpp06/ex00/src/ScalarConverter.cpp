@@ -15,12 +15,12 @@ ScalarConverter::ScalarConverter(const ScalarConverter& copy)
 	(void)copy;
 }
 
-bool is_digit(char c)
+static bool is_digit(char c)
 {
 	return (c >= '0' && c <= '9');
 }
 
-bool is_space(char c)
+static bool is_space(char c)
 {
 	return ((c >= 9 && c <= 13) || c == 32);
 }
@@ -31,7 +31,7 @@ ScalarConverter& ScalarConverter::operator=(const ScalarConverter& copy)
 	return (*this);
 }
 
-int getType(std::string& input)
+static int getType(std::string& input)
 {
 	if (input.length() == 1 && !is_digit(input[0]))
 		return (1);
@@ -53,7 +53,7 @@ int getType(std::string& input)
 	return (-1);
 }
 
-void fromInt(std::string& input)
+static void fromInt(std::string& input)
 {
 	errno = 0;
 	long int i = strtol(input.c_str(), NULL, 10);
@@ -76,7 +76,7 @@ void fromInt(std::string& input)
 	std::cout << "To double: " << static_cast<double>(i) << std::endl;
 }
 
-void fromChar(std::string& input)
+static void fromChar(std::string& input)
 {
 	std::cout << "To int: " << static_cast<int>(input[0]) << "\n";
 	std::cout << "To char: ";
@@ -89,7 +89,7 @@ void fromChar(std::string& input)
 	std::cout << "To double: " << static_cast<double>(input[0]) << std::endl;
 }
 
-void fromFloat(std::string& input)
+static void fromFloat(std::string& input)
 {
 	errno = 0;
 	float i = strtof(input.c_str(), NULL);
@@ -117,7 +117,7 @@ void fromFloat(std::string& input)
 	std::cout << "To double: " << static_cast<double>(i) << std::endl;
 }
 
-void fromDouble(std::string& input)
+static void fromDouble(std::string& input)
 {
 	errno = 0;
 	double i = strtod(input.c_str(), NULL);
@@ -138,7 +138,7 @@ void fromDouble(std::string& input)
 	std::cout << "To double: " << static_cast<double>(i) << std::endl;
 }
 
-void specialPrint(std::string& input)
+static void specialPrint(std::string& input)
 {
 	if (input == "inf" || input == "inff")
 		input = "+inf";

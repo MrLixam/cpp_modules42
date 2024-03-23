@@ -76,4 +76,5 @@ void identify(Base& p)
 		return ;
 	}
 	catch ( ... ) { }
+	std::cerr << "what." << std::endl;
 }
