@@ -9,11 +9,21 @@ Intern::Intern(void) { }
 
 Intern::~Intern(void) { }
 
+Intern::Intern(const Intern& copy) 
+{
+	(void)copy;
+}
+
+Intern& Intern::operator=(const Intern& copy)
+{
+	(void)copy;
+	return (*this);
+}
+
 static AForm* newShrubbery(std::string target)
 {
 	return (new ShrubberyCreationForm(target));
 }
-
 
 static AForm* newPresidential(std::string target)
 {
