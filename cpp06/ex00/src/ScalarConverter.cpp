@@ -1,6 +1,7 @@
 #include "ScalarConverter.hpp"
 #include <iostream>
 #include <climits>
+#include <limits>
 #include <cstdlib>
 #include <sstream>
 #include <cerrno>
@@ -71,8 +72,6 @@ void fromInt(std::string& input)
 	else
 		std::cout << "impossible\n";
 
-	std::cout.precision(1);
-	std::cout << std::fixed;
 	std::cout << "To float: " << static_cast<float>(i) << "f\n";
 	std::cout << "To double: " << static_cast<double>(i) << std::endl;
 }
@@ -86,8 +85,6 @@ void fromChar(std::string& input)
 	else
 		std::cout << input[0] << "\n";
 	
-	std::cout.precision(1);
-	std::cout << std::fixed;
 	std::cout << "To float: " << static_cast<float>(input[0]) << "f\n";
 	std::cout << "To double: " << static_cast<double>(input[0]) << std::endl;
 }
@@ -116,8 +113,6 @@ void fromFloat(std::string& input)
 	else
 		std::cout << "impossible\n";
 
-	std::cout.precision(1);
-	std::cout << std::fixed;
 	std::cout << "To float: " << static_cast<float>(i) << "f\n";
 	std::cout << "To double: " << static_cast<double>(i) << std::endl;
 }
@@ -127,11 +122,6 @@ void fromDouble(std::string& input)
 	errno = 0;
 	double i = strtod(input.c_str(), NULL);
 
-	if (errno == ERANGE)
-	{
-		std::cerr << "passed value could not be represented as a double" << std::endl;
-		return ;
-	}
 	if (i <= INT_MAX && i >= INT_MIN)
 		std::cout << "To int: " << static_cast<int>(i) << "\n";
 	else
@@ -144,8 +134,6 @@ void fromDouble(std::string& input)
 	else
 		std::cout << "impossible\n";
 
-	std::cout.precision(1);
-	std::cout << std::fixed;
 	std::cout << "To float: " << static_cast<float>(i) << "f\n";
 	std::cout << "To double: " << static_cast<double>(i) << std::endl;
 }
