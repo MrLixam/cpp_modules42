@@ -1,8 +1,9 @@
 #include "ScalarConverter.hpp"
 #include <iostream>
 #include <climits>
-#include <cerrno>
 #include <cstdlib>
+#include <sstream>
+#include <cerrno>
 
 ScalarConverter::ScalarConverter() { }
 
@@ -13,129 +14,203 @@ ScalarConverter::ScalarConverter(const ScalarConverter& copy)
 	(void)copy;
 }
 
+bool is_digit(char c)
+{
+	return (c >= '0' && c <= '9');
+}
+
+bool is_space(char c)
+{
+	return ((c >= 9 && c <= 13) || c == 32);
+}
+
 ScalarConverter& ScalarConverter::operator=(const ScalarConverter& copy)
 {
 	(void)copy;
 	return (*this);
 }
 
-void toInt(std::string input)
+int getType(std::string& input)
 {
+	if (input.length() == 1 && !is_digit(input[0]))
+		return (1);
 	char *error;
-	double value = std::strtod(input.c_str(), &error);
-	if (errno == ERANGE || value < INT_MIN || value > INT_MAX || value != value)
-	{
-		std::cout << "Conversion to int: impossible" << std::endl;
-		return ;
-	}
-	if ( *error != 0 && (*error != 'f' || *(error + 1) != 0))
-	{
-		std::cout << "Conversion to int: impossible" << std::endl;
-		return ;
-	}
-	std::cout << "Conversion to int: " << static_cast<int>(value) << std::endl;
+	std::string test;
+
+	long int testInt = strtol(input.c_str(), &error, 10);
+	(void)testInt;
+	if (*error == 0)
+		return (0);
+	double testDouble = strtod(input.c_str(), &error);
+	(void)testDouble;
+	if (*error == 0)
+		return (3);
+
+	if (*error == 'f' && *(error + 1) == 0)
+		return (2);
+
+	return (-1);
 }
 
-void toChar(std::string input)
+void fromInt(std::string& input)
 {
-	char *error;
-	double value = std::strtod(input.c_str(), &error);
-	if (errno == ERANGE || value < 0 || value > 127 || value != value)
+	errno = 0;
+	long int i = strtol(input.c_str(), NULL, 10);
+
+	if (errno == ERANGE || i > INT_MAX || i < INT_MIN)
 	{
-		std::cout << "Conversion to char: impossible" << std::endl;
+		std::cerr << "passed value could not be represented as an int" << std::endl;
 		return ;
 	}
-	if ( *error != 0 && (*error != 'f' || *(error + 1) != 0))
+	std::cout << "To int: " << i << "\n";
+	std::cout << "To char: ";
+	if ((i >= 0 && i < 32) || i == 127)
+		std::cout << "Non-printable\n";
+	else if (i >= 32 && i < 127)
+		std::cout << '\'' << static_cast<char>(i) << '\'' << "\n";
+	else
+		std::cout << "impossible\n";
+
+	std::cout.precision(1);
+	std::cout << std::fixed;
+	std::cout << "To float: " << static_cast<float>(i) << "f\n";
+	std::cout << "To double: " << static_cast<double>(i) << std::endl;
+}
+
+void fromChar(std::string& input)
+{
+	std::cout << "To int: " << static_cast<int>(input[0]) << "\n";
+	std::cout << "To char: ";
+	if ((input[0] >= 0 && input[0] < 32) || input[0] == 127)
+		std::cout << "Non-printable\n";
+	else
+		std::cout << input[0] << "\n";
+	
+	std::cout.precision(1);
+	std::cout << std::fixed;
+	std::cout << "To float: " << static_cast<float>(input[0]) << "f\n";
+	std::cout << "To double: " << static_cast<double>(input[0]) << std::endl;
+}
+
+void fromFloat(std::string& input)
+{
+	errno = 0;
+	float i = strtof(input.c_str(), NULL);
+
+	if (errno == ERANGE)
 	{
-		if (input.length() == 1)
-			std::cout << "Conversion to char: " << input[0] << std::endl;
+		std::cerr << "passed value could not be represented as a float" << std::endl;
+		return ;
+	}
+	double test = strtod(input.c_str(), NULL);
+
+	if (test <= INT_MAX && test >= INT_MIN)
+		std::cout << "To int: " << static_cast<int>(i) << "\n";
+	else
+		std::cout << "To int: impossible\n";
+	std::cout << "To char: ";
+	if ((i >= 0 && i < 32) || i == 127)
+		std::cout << "Non-printable\n";
+	else if (i >= 32 && i < 127)
+		std::cout << '\'' << static_cast<char>(i) << '\'' << "\n";
+	else
+		std::cout << "impossible\n";
+
+	std::cout.precision(1);
+	std::cout << std::fixed;
+	std::cout << "To float: " << static_cast<float>(i) << "f\n";
+	std::cout << "To double: " << static_cast<double>(i) << std::endl;
+}
+
+void fromDouble(std::string& input)
+{
+	errno = 0;
+	double i = strtod(input.c_str(), NULL);
+
+	if (errno == ERANGE)
+	{
+		std::cerr << "passed value could not be represented as a double" << std::endl;
+		return ;
+	}
+	if (i <= INT_MAX && i >= INT_MIN)
+		std::cout << "To int: " << static_cast<int>(i) << "\n";
+	else
+		std::cout << "To int: impossible\n";
+	std::cout << "To char: ";
+	if ((i >= 0 && i < 32) || i == 127)
+		std::cout << "Non-printable\n";
+	else if (i >= 32 && i < 127)
+		std::cout << '\'' << static_cast<char>(i) << '\'' << "\n";
+	else
+		std::cout << "impossible\n";
+
+	std::cout.precision(1);
+	std::cout << std::fixed;
+	std::cout << "To float: " << static_cast<float>(i) << "f\n";
+	std::cout << "To double: " << static_cast<double>(i) << std::endl;
+}
+
+void specialPrint(std::string& input)
+{
+	if (input == "inf" || input == "inff")
+		input = "+inf";
+	if (input == "nan" || input == "-inf"  || input == "+inf")
+	{
+		std::cout << "To int: impossible\n";
+		std::cout << "To char: impossible\n";
+		std::cout << "To float: " << input << "f\n";
+		std::cout << "To double: " << input << std::endl;
+		return ;
+	}
+	if ( input == "nanf" || input == "-inff" || input == "+inff")
+	{
+		std::cout << "To int: impossible\n";
+		std::cout << "To char: impossible\n";
+		std::cout << "To float: " << input << "\n";
+		std::cout << "To double: ";
+		if ( input == "nanf" )
+			std::cout << "nan";
+		else if ( input == "-inff" )
+			std::cout << "-inf";
 		else
-			std::cout << "Conversion to char: impossible" << std::endl;
+			std::cout << "+inf";
+		std::cout << std::endl;
 		return ;
 	}
-	if (!std::isprint(value))
-	{
-		std::cout << "Conversion to char: non-printable ( " << value << " )" << std::endl;
-		return ;
-	}
-	std::cout << "Conversion to char: " << static_cast<char>(static_cast<int>(value));
-	if (value == 32)
-		std::cout << " (space)";
-	std::cout << std::endl;
-}
-
-void toFloat(std::string input)
-{
-	if (input == "+inf" || input == "-inf" || input == "+inff" || input == "-inff")
-	{
-		std::cout << "Conversion to float: " << input[0] << "inff" << std::endl;
-		return;
-	}
-	if (input == "nan" || input == "nanf")
-	{
-		std::cout << "Conversion to float: " << "nanf" << std::endl;
-		return ;
-	}
-	char *error;
-	float value = std::strtof(input.c_str(), &error);
-	if (value != value)
-	{
-		std::cout << "Conversion to float: nan" << std::endl;
-		return ;
-	}
-	if ( *error != 0 && (*error != 'f' || *(error + 1) != 0))
-	{
-		std::cout << "Conversion to float: impossible" << std::endl;
-		return ;
-	}
-	if (static_cast<int>(value) == value)
-		std::cout << "Conversion to float: " << value << ".0f" << std::endl;
-	else
-		std::cout << "Conversion to float: " << value << "f" << std::endl;
-}
-
-void toDouble(std::string input)
-{
-	if (input == "+inf" || input == "-inf" || input == "+inff" || input == "-inff")
-	{
-		std::cout << "Conversion to double: " << input[0] << "inf" << std::endl;
-		return;
-	}
-	if (input == "nan" || input == "nanf")
-	{
-		std::cout << "Conversion to double: " << "nan" << std::endl;
-		return ;
-	}
-	char *error;
-	double value = std::strtod(input.c_str(), &error);
-	if (value != value)
-	{
-		std::cout << "Conversion to double: nan" << std::endl;
-		return ;
-	}
-	if ( *error != 0 && (*error != 'f' || *(error + 1) != 0))
-	{
-		std::cout << "Conversion to double: impossible" << std::endl;
-		return ;
-	}
-	if (static_cast<int>(value) == value)
-		std::cout << "Conversion to double: " << value << ".0" << std::endl;
-	else
-		std::cout << "Conversion to double: " << value << std::endl;
 }
 
 void ScalarConverter::convert(std::string input)
 {
-	if (!(input == "nan" || input == "nanf" || input == "-inf" || input == "-inff" || input == "+inf" || input == "+inff"))
+	int i = 0;
+	while (is_space(input[i]))
+		i++;
+	input = input.substr(i);
+	if (input.length() == 0)
 	{
-		toInt(input);
-		toChar(input);
+		std::cerr << "Empty argument" << std::endl;
+		return;
 	}
-	else
+	if (input == "nan" || input == "nanf" || input == "-inf" || input == "-inff" || input == "+inf" || input == "+inff" || input == "inf" || input == "inff")
 	{
-		std::cout << "Conversion to int: impossible\n";
-		std::cout << "Conversion to char: impossible\n";
+		specialPrint(input);
+		return ;
 	}
-	toFloat(input);
-	toDouble(input);
+	int what = getType(input);
+	switch (what)
+	{
+		case 0:
+			fromInt(input);
+			break;
+		case 1:
+			fromChar(input);
+			break;
+		case 2:
+			fromFloat(input);
+			break;
+		case 3:
+			fromDouble(input);
+			break;
+		default:
+			std::cerr << "input does not convert to any of the four types" << std::endl;
+	}
 }
