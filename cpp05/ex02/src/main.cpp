@@ -38,4 +38,9 @@ int main(void)
 	executor.executeForm(test3);
 	executor.executeForm(test3);
 	executor.executeForm(test3);
+
+	AForm* testPointer = new PresidentialPardonForm();
+	executor.signForm(*testPointer);
+	executor.executeForm(*testPointer);
+	delete testPointer;
 }

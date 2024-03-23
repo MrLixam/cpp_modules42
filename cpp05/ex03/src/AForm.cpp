@@ -63,10 +63,9 @@ void AForm::beSigned(Bureaucrat &who)
 {
 	if (_signed)
 		throw AForm::AFormAlreadySignedException();
-	else if (who.getGrade() > _grade_to_sign)
+	if (who.getGrade() > _grade_to_sign)
 		throw Bureaucrat::GradeTooLowException();
-	else
-		_signed = true;
+	_signed = true;
 }
 
 void AForm::setTarget(std::string new_target)
