@@ -56,3 +56,13 @@ unsigned int Span::longestSpan(void) const
 	std::vector<int>::const_iterator max = std::max_element(_storage.begin(), _storage.end());
 	return (*max - *min);
 }
+
+const char *Span::FullSpanException::what() const throw()
+{
+	return ("The Span is full");
+}
+
+const char * Span::SpanTooSmallException::what() const throw()
+{
+	return ("There are not enough numbers to perform operation");
+}

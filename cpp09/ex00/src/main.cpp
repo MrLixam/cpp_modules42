@@ -1,7 +1,7 @@
 #include "BitcoinExchange.hpp"
 #include <iostream>
 
-int main(int argc, char argv[])
+int main(int argc, char *argv[])
 {
 	if (argc < 2)
 	{
@@ -13,4 +13,5 @@ int main(int argc, char argv[])
 		std::cerr << "Too many arguments" << std::endl;
 		return (1);
 	}
+	BitcoinExchange exec(argv[1]);
 }

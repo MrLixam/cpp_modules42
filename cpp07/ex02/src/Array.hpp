@@ -12,6 +12,9 @@
 template<typename T>
 class Array
 {
+	private:
+		T*				_array;
+		unsigned int	_size;
 	public:
 		Array(void);
 		Array(unsigned int n);
@@ -28,9 +31,6 @@ class Array
 					return ("Index out of bounds");
 				}
 		};
-	private:
-		T*				_array;
-		unsigned int	_size;
 };
 
 #endif

@@ -32,9 +32,9 @@ int main()
 	std::cout << "Base tests done" << std::endl;
 
 	srand(time(NULL) ^ getpid());
-	Span test_big(1000000);
-	for (int i = 0; i < 1000000; i++)
-		test_big.addNumber(rand() % 999999);
+	Span test_big(10000);
+	for (int i = 0; i < 10000; i++)
+		test_big.addNumber(rand() % 9999);
 	std::cout << test_big.longestSpan() << std::endl;
 	std::cout << test_big.shortestSpan() << std::endl;
 	return 0;

@@ -21,9 +21,9 @@ int main()
 	std::cout << BLUE << "Default constructor is correct" << RESET << std::endl;
 	for (unsigned int i = 0; i < SIZE; i++)
 	{
-		int temp = rand() % SIZE;
-		control[i] = temp;
-		test[i] = temp;
+		int tempInt = rand() % SIZE;
+		control[i] = tempInt;
+		test[i] = tempInt;
 	}
 	std::cout << GREEN << "Assignation does not crash" << RESET << std::endl;
 	for (unsigned int i = 0; i < SIZE; i++)
@@ -46,7 +46,7 @@ int main()
 			return (1);
 		}
 	}
-	std::cout << GREEN << "Copy Construction is correct" << RESET << std::endl;
+	std::cout << GREEN << "Copy Construction is correct :)" << RESET << std::endl;
 	Array<int> copy_op;
 	copy_op = test;
 	for (unsigned int i = 0; i < SIZE; i++)
@@ -58,14 +58,14 @@ int main()
 			return (1);
 		}
 	}
-	std::cout << GREEN << "Copy Operator is correct" << RESET << std::endl;
+	std::cout << GREEN << "Copy Operator is correct :)" << RESET << std::endl;
 	std::cout << BLUE << test.size() << " == " << SIZE << RESET << std::endl;
 	if (test.size() != SIZE)
 	{
 		std::cerr << RED << "Size method is incorrect" << RESET << std::endl;
 		return (1);
 	}
-	std::cout << GREEN << "Size method is correct" << RESET << std::endl;
+	std::cout << GREEN << "Size method is correct :)" << RESET << std::endl;
 	std::cout << "\n";
 	try
 	{
@@ -76,5 +76,25 @@ int main()
 	{
 		std::cerr << GREEN << e.what() << " (Expected Behaviour)" << RESET << std::endl;
 	}
+
+	Array<int> testCopy(test);
+	test[0] = test[0] + 1;
+	std::cout << BLUE << "test[0] = "<< test[0] << "  " << "testCopy[0] = " << testCopy[0] << std::endl;
+	if (test[0] == testCopy[0])
+		std::cerr <<  RED << "Copy constructor is incorrect" << std::endl;
+	else
+		std::cout << GREEN << "Copy constructor works as expected" << std::endl; 
+	
+	Array<int> testCopyOp;
+
+	testCopyOp = test;
+
+	test[0] = test[0] - 1;
+	std::cout << BLUE << "test[0] = "<< test[0] << "  " << "testCopy[0] = " << testCopyOp[0] << std::endl; 
+	if (test[0] == testCopyOp[0])
+		std::cerr <<  RED << "Copy operator is incorrect" << std::endl;
+	else
+		std::cout << GREEN << "Copy operator works as expected" << std::endl; 
+	
 	return (0);
 }

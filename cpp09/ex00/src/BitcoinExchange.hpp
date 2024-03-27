@@ -8,7 +8,7 @@ class BitcoinExchange
 {
 	private:
 		std::map<std::string, float> database;
-		std::string filename;
+		std::string _filename;
 
 		void initData(void);
 		void parseLine(std::string line);

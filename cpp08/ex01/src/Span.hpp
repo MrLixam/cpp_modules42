@@ -22,17 +22,11 @@ class Span
 		void fillSpan(const typename T::iterator start, const typename T::iterator end);
 		class FullSpanException : public std::exception
 		{
-			virtual const char * what() const throw()
-			{
-				return ("The Span is full");
-			}
+			virtual const char * what() const throw();
 		};
 		class SpanTooSmallException : public std::exception
 		{
-			virtual const char * what() const throw()
-			{
-				return ("There are not enough numbers to perform operation");
-			}
+			virtual const char * what() const throw();
 		};
 };
 
