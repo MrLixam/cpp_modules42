@@ -13,11 +13,11 @@ class BitcoinExchange
 		int initData(void);
 		void parseFile(void);
 		double matchDate(std::string base_date);
-	public:
 		BitcoinExchange(void);
+		BitcoinExchange(const BitcoinExchange& copy);
+	public:
 		~BitcoinExchange(void);
 		BitcoinExchange(std::string filename);
-		BitcoinExchange(const BitcoinExchange& copy);
 		BitcoinExchange& operator=(const BitcoinExchange& copy);
 };
 

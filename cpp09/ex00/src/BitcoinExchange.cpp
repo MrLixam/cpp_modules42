@@ -279,6 +279,7 @@ void BitcoinExchange::parseFile(void)
 		std::cout << date << " => " << value << " = " <<  result << "\n";
 	}
 }
+BitcoinExchange::BitcoinExchange(void) { }
 
 BitcoinExchange::BitcoinExchange(std::string filename)
 {
@@ -289,3 +290,15 @@ BitcoinExchange::BitcoinExchange(std::string filename)
 }
 
 BitcoinExchange::~BitcoinExchange(void) { }
+
+BitcoinExchange::BitcoinExchange(const BitcoinExchange& copy): _database(copy._database), _filename(copy._filename) { }
+
+BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& copy)
+{
+	if (this != &copy)
+	{
+		_filename = copy._filename;
+		_database = copy._database;
+	}
+	return (*this);
+}
