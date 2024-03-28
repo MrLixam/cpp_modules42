@@ -6,7 +6,7 @@
 #    By: lvincent <lvincent@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/18 05:51:01 by lvincent          #+#    #+#              #
-#    Updated: 2024/03/23 15:14:52 by lvincent         ###   ########.fr        #
+#    Updated: 2024/03/28 21:42:48 by lvincent         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,14 +18,14 @@ RESET = \033[0m
 
 CC 		=	c++ 
 
-FLAGS 	=	-Werror -Wall -Wextra -std=c++98
-NAME 	=	Bureaucrats
+FLAGS 	=	-Werror -Wall -Wextra -std=c++98 -g
+NAME 	=	RPN
 
 SRC_DIR = src
 
 OBJ_DIR = obj
 
-SRC 	=	src/main.cpp src/Bureaucrat.cpp src/AForm.cpp src/ShrubberyCreationForm.cpp src/RobotomyRequestForm.cpp src/PresidentialPardonForm.cpp src/Intern.cpp
+SRC 	=	src/main.cpp src/RPN.cpp
 
 OBJ = $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRC))
 
