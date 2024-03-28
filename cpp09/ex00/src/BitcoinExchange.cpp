@@ -5,40 +5,35 @@
 #include <cstdlib>
 #include <iostream>
 #include <limits>
+#include <algorithm>
 
 static int parseDate(std::string date, bool mode)
 {
-	if (date.size() != 10)
+	if (std::count(date.begin(), date.end(), '-') != 2)
 	{
 		if (mode)
-			std::cout << "Date format invalid => " << date << "\n";
+			std::cout << "Invalid date format => " << date << "\n";
 		return (1);
 	}
-	if (date[4] != '-' || date[7] != '-')
+	for (long unsigned i = 0; i < date.size(); i++)
 	{
-		if (mode)
-			std::cout << "Date format invalid => " << date << "\n";
-		return (1);
+		if (!isdigit(date[i]) && date[i] != '-')
+		{
+			if (mode)
+				std::cout << "Date format invalid => " << date << "caca" << "\n";
+			return (1);
+		}
 	}
-	for (int i = 0; i < 10; i++)
-	{
-		if (i != 4 && i != 7)
-			if (!isdigit(date[i]))
-			{
-				if (mode)
-					std::cout << "Date format invalid => " << date << "\n";
-				return (1);
-			}
-	}
-	int year = strtol(date.c_str(),NULL, 10);
-	int month = strtol(date.c_str() + 5, NULL, 10);
-	int day = strtol(date.c_str() + 8, NULL, 10);
+	size_t a = date.find('-'), b = date.rfind('-');
+	errno = 0;
+	unsigned int year = strtol(date.c_str(),NULL, 10);
+	unsigned int month = strtol(date.c_str() + a + 1, NULL, 10);
+	unsigned int day = strtol(date.c_str() + b + 1, NULL, 10);
 
-	if (year < 2009)
+	if (errno == ERANGE)
 	{
 		if (mode)
-			std::cout << "Bitcoin was not created until 2009 => " << date << "\n";
-		return (1);
+			std::cout << "date string conversion overflowed => " << date << "\n";
 	}
 	if (month < 1 || month > 12)
 	{
@@ -93,12 +88,6 @@ static int parseDate(std::string date, bool mode)
 				return (1);
 			}
 			break;
-	}
-	if (year == 2009 && month == 1 && day < 2)
-	{
-		if (mode)
-			std::cout << "Bitcoin was launched on January second 2009 => " << date << "\n";
-		return (1);
 	}
 	return (0);
 }
@@ -167,7 +156,7 @@ int BitcoinExchange::initData(void)
 
 		char *test;
 		errno = 0;
-		double llvalue = strtod(value.c_str(), &test);
+		long double llvalue = strtod(value.c_str(), &test);
 		if (*test != 0)
 		{
 			std::cerr << "Value has invalid symbols, line: " << i << std::endl;
