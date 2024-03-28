@@ -7,12 +7,12 @@
 class BitcoinExchange
 {
 	private:
-		std::map<std::string, float> database;
+		std::map<std::string, double> _database;
 		std::string _filename;
 
-		void initData(void);
-		void parseLine(std::string line);
-
+		int initData(void);
+		void parseFile(void);
+		double matchDate(std::string base_date);
 	public:
 		BitcoinExchange(void);
 		~BitcoinExchange(void);
