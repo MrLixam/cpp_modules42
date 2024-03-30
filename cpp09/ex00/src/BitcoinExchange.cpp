@@ -7,6 +7,78 @@
 #include <limits>
 #include <algorithm>
 
+Date::Date(void): _year(0), _month(1), _day(1) { }
+
+Date::~Date(void) { }
+
+Date::Date(unsigned int year, unsigned int month, unsigned int day): _year(year), _month(month), _day(day) { }
+
+Date::Date(const Date& copy): _year(copy._year), _month(copy._month), _day(copy._day) {}
+
+Date& Date::operator=(const Date& copy)
+{
+	if (this != &copy)
+	{
+		_year = copy._year;
+		_month = copy._month;
+		_day = copy._day;
+	}
+	return (*this);
+}
+
+bool Date::operator!=(const Date& compare) const
+{
+	return (_year != compare._year || _month != compare._month || _day != compare._day);
+}
+
+bool Date::operator==(const Date& compare) const
+{
+	return (_year == compare._year && _month == compare._month && _day == compare._day);
+}
+
+bool Date::operator<(const Date& compare) const
+{
+	if (_year != compare._year) 
+		return (_year < compare._year);
+	if (_month != compare._month) 
+		return (_month < compare._month);
+	return (_day < compare._day);
+}
+
+bool Date::operator>(const Date& compare) const
+{
+	if (_year != compare._year) 
+		return (_year > compare._year);
+	if (_month != compare._month) 
+		return (_month > compare._month);
+	return (_day < compare._day);
+}
+
+bool Date::operator<=(const Date& compare) const
+{
+	return !(*this > compare);
+}
+
+bool Date::operator>=(const Date& compare) const
+{
+	return !(*this < compare);
+}
+
+unsigned int Date::getYear(void) const
+{
+	return (_year);
+}
+
+unsigned int Date::getMonth(void) const
+{
+	return (_month);
+}
+
+unsigned int Date::getDay(void) const
+{
+	return (_day);
+}
+
 static int parseDate(std::string date, bool mode)
 {
 	if (std::count(date.begin(), date.end(), '-') != 2)
@@ -154,6 +226,9 @@ int BitcoinExchange::initData(void)
 			return (1);
 		}
 
+		size_t a = date.find('-'), b = date.rfind('-');
+
+		Date saved(strtol(date.c_str(), NULL, 10), strtol(date.c_str() + a + 1, NULL, 10), strtol(date.c_str() + b + 1, NULL, 10));
 		char *test;
 		errno = 0;
 		long double llvalue = strtod(value.c_str(), &test);
@@ -170,7 +245,7 @@ int BitcoinExchange::initData(void)
 			return (1);
 		}
 
-		_database[date] = llvalue;
+		_database[saved] = llvalue;
 		i++;
 	}
 	if (_database.size() == 0)
@@ -182,7 +257,10 @@ int BitcoinExchange::initData(void)
 }
 double BitcoinExchange::matchDate(std::string base_date)
 {
-	std::map<std::string, double>::iterator it = _database.upper_bound(base_date);
+	size_t a = base_date.find('-'), b = base_date.rfind('-');
+
+	Date date_to_find(strtol(base_date.c_str(), NULL, 10), strtol(base_date.c_str() + a + 1, NULL, 10), strtol(base_date.c_str() + b + 1, NULL, 10));
+	std::map<Date, double>::iterator it = _database.upper_bound(date_to_find);
 
 	if (it == _database.begin())
 	{
