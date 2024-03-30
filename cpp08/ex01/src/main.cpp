@@ -20,7 +20,20 @@ int main()
 	int numbers[] = {1, 2, 3, 4, 5, 6, 7};
 	std::list<int> base(numbers, numbers + 7);
 	Span test(5);
+	Span ope;
 
+	{
+		Span temp(5);
+		temp.addNumber(6);
+		temp.addNumber(3);
+		temp.addNumber(17);
+		temp.addNumber(9);
+		temp.addNumber(11);
+		ope = temp;
+	}
+	std::cout << "trying the copy operator" << std::endl;
+	std::cout << ope.shortestSpan() << std::endl;
+	std::cout << ope.longestSpan() << std::endl;
 	try
 	{
 		test.fillSpan<std::list<int> >(base.begin(), base.end());
