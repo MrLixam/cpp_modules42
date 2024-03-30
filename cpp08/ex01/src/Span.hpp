@@ -20,6 +20,7 @@ class Span
 		void addNumber(int n);
 		template<typename T>
 		void fillSpan(const typename T::iterator start, const typename T::iterator end);
+		void printSpan(void) const;
 		class FullSpanException : public std::exception
 		{
 			virtual const char * what() const throw();

@@ -31,9 +31,12 @@ int main()
 		temp.addNumber(11);
 		ope = temp;
 	}
+
 	std::cout << "trying the copy operator" << std::endl;
+	ope.printSpan();
 	std::cout << ope.shortestSpan() << std::endl;
 	std::cout << ope.longestSpan() << std::endl;
+
 	try
 	{
 		test.fillSpan<std::list<int> >(base.begin(), base.end());
@@ -42,6 +45,9 @@ int main()
 	{
 		std::cerr << "Exception caught: " << e.what() << std::endl;
 	}
+	test.printSpan();
+	std::cout << test.longestSpan() << std::endl;
+	std::cout << test.shortestSpan() << std::endl;
 	std::cout << "Base tests done" << std::endl;
 
 	srand(time(NULL) ^ getpid());
