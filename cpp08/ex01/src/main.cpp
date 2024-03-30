@@ -19,7 +19,9 @@ int main()
 
 	int numbers[] = {1, 2, 3, 4, 5, 6, 7};
 	std::list<int> base(numbers, numbers + 7);
+	const std::list<int> constant = base;
 	Span test(5);
+	Span test_constant(5);
 	Span ope;
 
 	{
@@ -37,6 +39,8 @@ int main()
 	std::cout << ope.shortestSpan() << std::endl;
 	std::cout << ope.longestSpan() << std::endl;
 
+	std::cout << std::endl;
+
 	try
 	{
 		test.fillSpan<std::list<int> >(base.begin(), base.end());
@@ -48,8 +52,25 @@ int main()
 	test.printSpan();
 	std::cout << test.longestSpan() << std::endl;
 	std::cout << test.shortestSpan() << std::endl;
-	std::cout << "Base tests done" << std::endl;
 
+	std::cout << std::endl;
+
+	try
+	{
+		test_constant.fillSpan<std::list<int> >(constant.begin(), constant.end());
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << "Exception caught: " << e.what() << std::endl;
+	}
+	test_constant.printSpan();
+	std::cout << test_constant.longestSpan() << std::endl;
+	std::cout << test_constant.shortestSpan() << std::endl;
+	
+	std::cout << std::endl;
+	std::cout << "Base tests done" << std::endl;
+	std::cout << std::endl;
+	
 	srand(time(NULL) ^ getpid());
 	Span test_big(10000);
 	for (int i = 0; i < 10000; i++)
