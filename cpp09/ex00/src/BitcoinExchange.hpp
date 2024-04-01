@@ -15,9 +15,6 @@ class Date
 		Date(void);
 		Date(unsigned int year, unsigned int month, unsigned int day);
 		~Date();
-		unsigned int getYear(void) const;
-		unsigned int getMonth(void) const;
-		unsigned int getDay(void) const;
 		Date(const Date& copy);
 		Date& operator=(const Date& copy);
 		bool operator<(const Date& compare) const;

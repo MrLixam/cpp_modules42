@@ -64,21 +64,6 @@ bool Date::operator>=(const Date& compare) const
 	return !(*this < compare);
 }
 
-unsigned int Date::getYear(void) const
-{
-	return (_year);
-}
-
-unsigned int Date::getMonth(void) const
-{
-	return (_month);
-}
-
-unsigned int Date::getDay(void) const
-{
-	return (_day);
-}
-
 static int parseDate(std::string date, bool mode)
 {
 	if (std::count(date.begin(), date.end(), '-') != 2)
@@ -92,7 +77,7 @@ static int parseDate(std::string date, bool mode)
 		if (!isdigit(date[i]) && date[i] != '-')
 		{
 			if (mode)
-				std::cout << "Date format invalid => " << date << "caca" << "\n";
+				std::cout << "Date format invalid => " << date << "\n";
 			return (1);
 		}
 	}

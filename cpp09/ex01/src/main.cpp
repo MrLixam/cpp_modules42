@@ -65,16 +65,6 @@ int main(int argc, char *argv[])
 		return (1);
 	}
 	std::string arguments = parseArgs(argc, argv);
-	if (arguments.size() % 2 == 1)
-	{
-		std::cout << "how did this happen" << std::endl;
-		return (1);
-	}
-	if ((arguments.size() / 2) % 2 != 1)
-	{
-		std::cout << "invalid number of arguments" << std::endl;
-		return (1);
-	}
 	Rpn execute(arguments);
 	return (0);
 }

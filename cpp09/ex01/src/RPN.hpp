@@ -18,6 +18,18 @@ class Rpn
 		Rpn(std::string arguments);
 		~Rpn(void);
 		Rpn& operator=(const Rpn& copy);
+		class OverflowException : public std::exception
+		{
+			virtual const char * what() const throw();
+		};
+		class UnderflowException : public std::exception
+		{
+			virtual const char * what() const throw();
+		};
+		class ZeroDivisionException : public std::exception
+		{
+			virtual const char * what() const throw();
+		};
 };
 
 
