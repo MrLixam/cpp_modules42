@@ -2,6 +2,7 @@
 #include <vector>
 #include <iostream>
 #include <sys/time.h>
+#include <cstdlib>
 #include "PmergeMe.hpp"
 
 static void mergeDq(std::deque<int>::iterator begin, std::deque<int>::iterator middle, std::deque<int>::iterator end)
@@ -100,26 +101,52 @@ std::ostream& operator<<(std::ostream& outfile, std::deque<int> deque)
 	return (outfile);
 }
 
-void sort(std::vector<int>& vecToSort, std::deque<int>& dqToSort)
+void generateVector(int argc, char **argv, std::vector<int>& vector)
+{
+	for (int i = 1; i < argc; i++)
+	{
+		long int temp = strtol(argv[i], NULL, 10);
+		vector.push_back(temp);
+	}
+}
+
+void generateDeque(int argc, char **argv, std::deque<int>& deque)
+{
+	for (int i = 1; i < argc; i++)
+	{
+		long int temp = strtol(argv[i], NULL, 10);
+		deque.push_back(temp);
+	}
+}
+
+void sort(int argc, char **argv)
 {
 	timeval vecStart, vecEnd, dqStart, dqEnd;
-
-	std::cout << "Unsorted Vector: " << vecToSort << "\n";
-	std::cout << "Unsorted Deque: " << dqToSort << "\n"; 
-
-	std::cout << std::endl;
+	std::vector<int> vecToSort;
+	std::deque<int>dqToSort;
 
 	gettimeofday(&vecStart, NULL);
+	generateVector(argc, argv, vecToSort);
 	mergeSortVec(vecToSort.begin(), vecToSort.end());
 	gettimeofday(&vecEnd, NULL);
 
 	gettimeofday(&dqStart, NULL);
+	generateDeque(argc, argv, dqToSort);
 	mergeSortDq(dqToSort.begin(), dqToSort.end());
 	gettimeofday(&dqEnd, NULL);
 
 	long vecSeconds = vecEnd.tv_sec - vecStart.tv_sec, dqSeconds = dqEnd.tv_sec - dqStart.tv_sec;
 	long vecMicros = vecEnd.tv_usec - vecStart.tv_usec, dqMicros = dqEnd.tv_usec - dqStart.tv_usec;
 
+	std::vector<int> unsortedVector;
+	std::deque<int> unsortedDeque;
+
+	generateVector(argc, argv, unsortedVector);
+	generateDeque(argc, argv, unsortedDeque);
+
+	std::cout << "Unsorted Vector: " << unsortedVector << '\n';
+	std::cout << "Unsorted Deque: " << unsortedDeque << '\n';
+	std::cout << '\n';
 	std::cout << "Sorted Vector: " << vecToSort << "\n";
 	std::cout << "Sorted Deque: " << dqToSort << "\n";
 	std::cout << "\n";
