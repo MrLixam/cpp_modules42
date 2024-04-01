@@ -19,7 +19,8 @@ class Span
 		unsigned int longestSpan(void) const;
 		void addNumber(int n);
 		template<typename T>
-		void fillSpan(const typename T::iterator start, const typename T::iterator end);
+		void fillSpan(const typename T::const_iterator start, const typename T::const_iterator end);
+		void printSpan(void) const;
 		class FullSpanException : public std::exception
 		{
 			virtual const char * what() const throw();

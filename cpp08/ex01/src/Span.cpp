@@ -66,3 +66,18 @@ const char * Span::SpanTooSmallException::what() const throw()
 {
 	return ("There are not enough numbers to perform operation");
 }
+
+void Span::printSpan(void) const
+{
+	for (std::vector<int>::const_iterator it = _storage.begin(); it < _storage.end(); it++)
+	{
+		std::cout << *it;
+		std::vector<int>::const_iterator temp = it;
+		temp++;
+		if (temp != _storage.end())
+		{
+			std::cout << ' ';
+		}
+	}
+	std::cout << std::endl;
+}
